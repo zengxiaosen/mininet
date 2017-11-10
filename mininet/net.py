@@ -788,7 +788,7 @@ class Mininet( object ):
             return ''
 
 
-    def iperf_single( self, hosts=None, udpBw='10M', period=5, port=5001):
+    def iperf_single( self, hosts=None, udpBw='10M', period=10, port=5001):
         """Run iperf between two hosts using UDP.
              hosts: list of hosts; if None, uses opposite hosts
              returns: results two-element array of server and client speeds"""
@@ -803,6 +803,7 @@ class Mininet( object ):
         iperfArgs = 'iperf -u '
         bwArgs = '-b ' + udpBw + ' '
         print "***start server***"
+        # server.cmd( iperfArgs + '-s' + ' >> /home/zengxiaosen/log/' + 'server' + filename + '&')
         server.cmd( iperfArgs + '-s' + ' >> /home/zengxiaosen/log/' + 'server' + filename + '&')
         print "***start client***"
         client.cmd(
@@ -854,7 +855,7 @@ class Mininet( object ):
     #     sleep(period)
 
 
-    def iperfMulti(self, bw, period=5):
+    def iperfMulti(self, bw, period=10):      
       base_port = 5001
       server_list = [h for h in self.hosts]
       client_list = [h for h in self.hosts]
@@ -865,18 +866,26 @@ class Mininet( object ):
       ser_outs = []
 
       _len = len(host_list)
-      for i in xrange(0, _len):
-        client = host_list[i]
-        for j in xrange(0, _len):
-          server = host_list[j]
-          if server == client:
-            continue
-          else:
-            self.iperf_single(hosts = [client, server], udpBw=bw, period=period, port=base_port)
-            sleep(.05)
-        base_port += 1
+      for kkk in xrange(0, 20):
+        for i in xrange(0, _len):
+          client = host_list[i]
+          for j in xrange(0, _len):
+            server = host_list[j]
+            if server == client:
+              continue
+            else:
+              self.iperf_single(hosts = [client, server], udpBw=bw, period=period, port=base_port)
+              sleep(.05)
+          base_port += 1
+        base_port = 5001
+
+
       self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' >> /home/zengxiaosen/log/delay.out')
-      sleep(period)
+      #sleep(period)
+
+
+ 
+
 
 
 
