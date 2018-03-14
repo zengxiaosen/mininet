@@ -865,11 +865,20 @@ class Mininet( object ):
         ser_outs = []
 
         _len = len(host_list)
+        alreadyExist = []
         for i in xrange(0, _len):
             client = host_list[i]
             server = client
-            while( server == client ):
-                server = random.choice(host_list) 
+            # while( server == client ):
+            #     server = random.choice(host_list) 
+            while(1):
+                server = random.choice(host_list)
+                if server != client and server not in alreadyExist:
+                    alreadyExist.append(server)
+                    break
+                
+
+
             server_list.append(server)
             self.iperf_single(hosts = [client, server], udpBw=bw, period= period, port=base_port)
             #self.iperf(hosts = [client, server], udpBw=bw, seconds=period, port=base_port)
