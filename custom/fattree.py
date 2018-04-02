@@ -140,7 +140,7 @@ def pingTest(net):
 #10.108.37.197
 # 100 100M 0.1G
 # bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.05
-def createTopo(pod, density, ip="127.0.0.1", port=6633, bw_c2a=100, bw_a2e=100, bw_h2a=100):
+def createTopo(pod, density, ip="10.108.23.217", port=6633, bw_c2a=100, bw_a2e=100, bw_h2a=100):
     logging.debug("LV1 Create Fattree")
     topo = Fattree(pod, density)
     topo.createTopo()
