@@ -788,7 +788,7 @@ class Mininet( object ):
             return ''
 
 
-    def iperf_single( self,hosts=None, udpBw='10M', period=60, port=5001):
+    def iperf_single( self,hosts=None, udpBw='10M', period=300, port=5001):
         """Run iperf between two hosts using UDP.
            hosts: list of hosts; if None, uses opposite hosts
            returns: results two-element array of server and client speeds"""
