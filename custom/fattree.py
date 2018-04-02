@@ -77,7 +77,7 @@ class Fattree(Topo):
     # bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5
    
     
-    def createLink(self, bw_c2a=0.2, bw_a2e=0.1, bw_h2a=0.5):
+    def createLink(self, bw_c2a=100, bw_a2e=100, bw_h2a=100):
         logger.debug("Add link Core to Agg.")
         end = self.pod/2
         for x in xrange(0, self.iAggLayerSwitch, end):
@@ -86,7 +86,7 @@ class Fattree(Topo):
                     self.addLink(
                         self.CoreSwitchList[i*end+j],
                         self.AggSwitchList[x+i],
-                        bw=bw_c2a, delay='5ms')
+                        bw=bw_c2a, delay='5ms', loss=0, max_queue_size=1000, use_htb=True)
 
         logger.debug("Add link Agg to Edge.")
         for x in xrange(0, self.iAggLayerSwitch, end):
@@ -94,7 +94,7 @@ class Fattree(Topo):
                 for j in xrange(0, end):
                     self.addLink(
                         self.AggSwitchList[x+i], self.EdgeSwitchList[x+j],
-                        bw=bw_a2e, delay='5ms')
+                        bw=bw_a2e, delay='5ms', loss=0, max_queue_size=1000, use_htb=True)
 
         logger.debug("Add link Edge to Host.")
         for x in xrange(0, self.iEdgeLayerSwitch):
@@ -102,7 +102,7 @@ class Fattree(Topo):
                 self.addLink(
                     self.EdgeSwitchList[x],
                     self.HostList[self.density * x + i],
-                    bw=bw_h2a, delay='5ms')
+                    bw=bw_h2a, delay='5ms', loss=0, max_queue_size=1000, use_htb=True)
 
     def set_ovs_protocol_13(self,):
         self._set_ovs_protocol_13(self.CoreSwitchList)
@@ -175,4 +175,4 @@ if __name__ == '__main__':
     if os.getuid() != 0:
         logger.debug("You are NOT root")
     elif os.getuid() == 0:
-        createTopo(4, 2)
+        createTopo(8, 4)

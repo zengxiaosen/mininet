@@ -788,7 +788,7 @@ class Mininet( object ):
             return ''
 
 
-    def iperf_single( self,hosts=None, udpBw='10M', period=300, port=5001):
+    def iperf_single( self,hosts=None, udpBw='1M', period=300, port=5001):
         """Run iperf between two hosts using UDP.
            hosts: list of hosts; if None, uses opposite hosts
            returns: results two-element array of server and client speeds"""
@@ -866,11 +866,12 @@ class Mininet( object ):
 
         _len = len(host_list)
         alreadyExist = []
-        for i in xrange(0, _len):
+        for i in xrange(0, _len/2):
             client = host_list[i]
             server = client
             # while( server == client ):
-            #     server = random.choice(host_list) 
+            #     server = random.choice(host_list)
+            alreadyExist.append(client) 
             while(1):
                 server = random.choice(host_list)
                 if server != client and server not in alreadyExist:
