@@ -803,10 +803,10 @@ class Mininet( object ):
         iperfArgs = 'iperf -u '
         bwArgs = '-b ' + udpBw + ' '
         print "***start server***"
-        server.cmd( iperfArgs + '-s -i 1' + ' > /home/zengxiaosen/log/' + filename + '&')
+        server.cmd( iperfArgs + '-s -i 1' + ' > /home/kexin/log/' + filename + '&')
         print "***start client***"
         client.cmd(
-            iperfArgs + '-t '+ str(period) + ' -c ' + server.IP() + ' ' + bwArgs +' > /home/zengxiaosen/log/' + 'client' + filename +'&')
+            iperfArgs + '-t '+ str(period) + ' -c ' + server.IP() + ' ' + bwArgs +' > /home/kexin/log/' + 'client' + filename +'&')
 
     # def iperf_single( self,hosts=None, udpBw='10M', period=5, port=5001):
     #     """Run iperf between two hosts using UDP.
@@ -885,7 +885,7 @@ class Mininet( object ):
             #self.iperf(hosts = [client, server], udpBw=bw, seconds=period, port=base_port)
             sleep(.05)
             base_port += 1
-        self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/zengxiaosen/log/delay.out')
+        self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
         print "test has done"
 
