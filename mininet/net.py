@@ -865,18 +865,18 @@ class Mininet( object ):
         ser_outs = []
 
         _len = len(host_list)
-        alreadyExist = []
-        for i in xrange(0, _len/2):
+        #alreadyExist = []
+        for i in xrange(0, _len):
             client = host_list[i]
             server = client
-            # while( server == client ):
-            #     server = random.choice(host_list)
-            alreadyExist.append(client) 
-            while(1):
+            while( server == client ):
                 server = random.choice(host_list)
-                if server != client and server not in alreadyExist:
-                    alreadyExist.append(server)
-                    break
+            #alreadyExist.append(client) 
+            #while(1):
+            #    server = random.choice(host_list)
+            #    if server != client and server not in alreadyExist:
+            #        alreadyExist.append(server)
+            #        break
                 
 
 
@@ -885,7 +885,7 @@ class Mininet( object ):
             #self.iperf(hosts = [client, server], udpBw=bw, seconds=period, port=base_port)
             sleep(.05)
             base_port += 1
-        self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
+        self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/zengxiaosen/log/delay.out')
         sleep(period)
         print "test has done"
 
