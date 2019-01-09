@@ -1,2 +1,2 @@
-please mkdir /home/kexin/log
+please mkdir /home/aonezeng/log
 if not, there will be some problem
