@@ -878,7 +878,7 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
-            fileName = "/home/kexin/context/trafficCtx_" + bw + + ".csv"
+            fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
             #log and persist
             thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "fileName": fileName})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
