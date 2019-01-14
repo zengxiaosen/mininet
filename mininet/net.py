@@ -892,7 +892,7 @@ class Mininet( object ):
         output("client: " + str(client) + "\n")
         output("server: " + str(server) + "\n")
         strPersist = '%s,%s,%s' % (client, server, bwRes)
-        output("StrPersist: " + strPersist)
+        output("StrPersist: " + strPersist + "\n")
         f = open("/home/kexin/context/trafficCtx_" + bwRes + ".csv", 'a')
         f.writelines(strPersist)
         f.close()
