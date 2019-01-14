@@ -897,7 +897,7 @@ class Mininet( object ):
             base_port += 1
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
-        output('test has done')
+        output('test has done\n')
 
 
 
