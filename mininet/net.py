@@ -878,6 +878,7 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
+            output(type(bw))
             #log and persist
             thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bw": bw})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
