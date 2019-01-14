@@ -887,7 +887,6 @@ class Mininet( object ):
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
 
-    # 'w'这个模式是酱紫：如果没有这个文件，就创建一个；如果有，那么就会先把原文件的内容清空再写入新的东西。
     def trafficContextLogAndPersist( self, bwRes, client, server):
         output("bw: " + bwRes + "\n")
         output("client: " + str(client) + "\n")
