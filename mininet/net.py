@@ -892,7 +892,7 @@ class Mininet( object ):
         output("client: " + str(client) + "\n")
         output("server: " + str(server) + "\n")
         output("fileName: " + fileName + '\n')
-        strPersist = '%s,%s,%s' % (client, server, bwRes)
+        strPersist = '%s,%s,%s\n' % (client, server, bwRes)
         output("StrPersist: " + strPersist + "\n")
         f = open(fileName, 'a')
         f.writelines(strPersist)
