@@ -891,8 +891,8 @@ class Mininet( object ):
         output("bw: " + bwRes + "\n")
         output("client: " + str(client) + "\n")
         output("server: " + str(server) + "\n")
-        f = open('/home/kexin/context/trafficCtx' + bwRes, 'w')
-        f.write(client + ',' + server + ',' + bwRes)
+        f = open('/home/kexin/context/trafficCtx' + bwRes, 'a')
+        f.write(client + "," + server + "," + bwRes)
         f.close()
 
     # XXX This should be cleaned up
