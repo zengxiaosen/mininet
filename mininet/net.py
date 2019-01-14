@@ -879,15 +879,15 @@ class Mininet( object ):
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
             #log and persist
-            thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bwStrEnd": bwStrEnd})
+            thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bw": bw})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
             sleep(.05)
             base_port += 1
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
 
-    def trafficContextLogAndPersist(self, bwRes, client, server, bwStrEnd):
-        fileName = "/home/kexin/context/trafficCtx_" + bwStrEnd + ".csv"
+    def trafficContextLogAndPersist(self, bwRes, client, server, bw):
+        fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
         output("bw: " + bwRes + "\n")
         output("client: " + str(client) + "\n")
         output("server: " + str(server) + "\n")
