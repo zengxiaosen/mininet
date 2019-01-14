@@ -878,19 +878,20 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
-            fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
             #log and persist
-            thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "fileName": fileName})
+            thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bwStrEnd": bwStrEnd})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
             sleep(.05)
             base_port += 1
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
 
-    def trafficContextLogAndPersist(self, bwRes, client, server, fileName):
+    def trafficContextLogAndPersist(self, bwRes, client, server, bwStrEnd):
+        fileName = "/home/kexin/context/trafficCtx_" + bwStrEnd + ".csv"
         output("bw: " + bwRes + "\n")
         output("client: " + str(client) + "\n")
         output("server: " + str(server) + "\n")
+        output("fileName: " + fileName + '\n')
         strPersist = '%s,%s,%s' % (client, server, bwRes)
         output("StrPersist: " + strPersist + "\n")
         f = open(fileName, 'a')
