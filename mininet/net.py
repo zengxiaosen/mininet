@@ -888,7 +888,9 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
-            output("bw" + bwRes)
+            output("bw: " + bwRes)
+            output("client: " + str(client))
+            output("server: " + str(server))
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
             #self.iperf(hosts = [client, server], udpBw=bw, seconds=period, port=base_port)
             sleep(.05)
