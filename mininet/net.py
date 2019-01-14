@@ -853,17 +853,18 @@ class Mininet( object ):
     #     sleep(period)
 
 
-    def iperfMulti(self, bw, period=60):      
+    def iperfMulti(self, bw, period=60):
+
         base_port = 5001
         server_list = []
-        client_list = [h for h in self.hosts]
-        host_list = []
         host_list = [h for h in self.hosts]
-
-        cli_outs = []
-        ser_outs = []
-
         _len = len(host_list)
+        fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
+        if (os.path.exists(fileName)):
+            os.remove(fileName)
+            print "history file existed, remove it"
+
+
         for i in xrange(0, _len):
             client = host_list[i]
             server = client
@@ -886,6 +887,8 @@ class Mininet( object ):
             base_port += 1
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
+
+
 
     def trafficContextLogAndPersist(self, bwRes, client, server, bw):
         fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
