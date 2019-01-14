@@ -862,7 +862,9 @@ class Mininet( object ):
         fileName = "/home/kexin/context/trafficCtx_" + bw + ".csv"
         if (os.path.exists(fileName)):
             os.remove(fileName)
-            print "history file existed, remove it"
+            output("history context existed, remove it")
+        else:
+            output("there is not history context")
 
 
         for i in xrange(0, _len):
@@ -879,7 +881,6 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
-            output(type(bw))
             #log and persist
             thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bw": bw})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
