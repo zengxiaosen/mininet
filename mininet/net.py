@@ -106,7 +106,7 @@ from mininet.util import ( quietRun, fixLimits, numCores, ensureRoot,
                            macColonHex, ipStr, ipParse, netParse, ipAdd,
                            waitListening )
 from mininet.term import cleanUpScreens, makeTerms
-
+import thread
 # Mininet version: should be consistent with README and LICENSE
 VERSION = "2.3.0d1"
 
@@ -855,7 +855,6 @@ class Mininet( object ):
 
     def iperfMulti(self, bw, period=60):      
         base_port = 5001
-        # server_list = [h for h in self.hosts]
         server_list = []
         client_list = [h for h in self.hosts]
         host_list = []
@@ -865,20 +864,11 @@ class Mininet( object ):
         ser_outs = []
 
         _len = len(host_list)
-        #alreadyExist = []
         for i in xrange(0, _len):
             client = host_list[i]
             server = client
             while( server == client ):
                 server = random.choice(host_list)
-            #alreadyExist.append(client) 
-            #while(1):
-            #    server = random.choice(host_list)
-            #    if server != client and server not in alreadyExist:
-            #        alreadyExist.append(server)
-            #        break
-                
-
 
             server_list.append(server)
             
@@ -888,18 +878,19 @@ class Mininet( object ):
             r = random.random()
             bwRandom = int(bwStrSize) * r
             bwRes = str(bwRandom) + bwStrEnd
-            output("bw: " + bwRes + "\n")
-            output("client: " + str(client) + "\n")
-            output("server: " + str(server) + "\n")
+
+            #log and persist
+            thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRest": bwRes, "client": client, "server": server})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
-            #self.iperf(hosts = [client, server], udpBw=bw, seconds=period, port=base_port)
             sleep(.05)
             base_port += 1
         self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' > /home/kexin/log/delay.out')
         sleep(period)
-        # output('test has done')
 
-
+    def trafficContextLogAndPersist( self, bwRes, client, server):
+        output("bw: " + bwRes + "\n")
+        output("client: " + str(client) + "\n")
+        output("server: " + str(server) + "\n")
 
     # XXX This should be cleaned up
     def iperf( self, hosts=None, l4Type='TCP', udpBw='10M', fmt=None,
