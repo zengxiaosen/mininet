@@ -866,7 +866,8 @@ class Mininet( object ):
         file_object = open(fileName, "r+")
         for line in file_object:
             line = line.strip()
-            output(line)
+            lineSplite = line.split(',')
+            output("src:%s,dst:%s,bw:%s \n" % (lineSplite[0], lineSplite[1], lineSplite[2]))
 
         file_object.close()
 
