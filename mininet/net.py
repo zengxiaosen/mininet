@@ -863,12 +863,12 @@ class Mininet( object ):
             output("there is not context file\n")
             return
 
-        for i in xrange(0, _len):
-            client = host_list[i]
-            server = client
-            while(server == client):
-                server = random.choice(host_list)
-            server_list.append(server)
+        file_object = open(fileName, "r+")
+        for line in file_object:
+            line = line.strip()
+            output(line)
+
+        file_object.close()
 
 
 
