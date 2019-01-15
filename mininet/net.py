@@ -875,7 +875,8 @@ class Mininet( object ):
                     bandWidth = lineSplite[2]
                     # output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
                     # search dst
-                    dst = self.getDst(lineSplite[1], file_object, _len, host_list)
+                    # dst = self.getDst(lineSplite[1], file_object, _len, host_list)
+                    dst = lineSplite[1]
                     output('src:%s,dst:%s,bw:%s \n' % (str(client), str(dst), lineSplite[2]))
                     break
                 else:
