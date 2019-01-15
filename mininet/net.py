@@ -864,12 +864,22 @@ class Mininet( object ):
             output("there is not context file\n")
             return
         base_port = 5001
+        file_object = open(fileName, "r+")
         for i in xrange(0, _len):
             client = host_list[i]
-            output(str(client))
+            output("client: " + str(client) + "\n")
+            for line in file_object:
+                line = line.strip()
+                lineSplite = line.split(',')
+                if (lineSplite[0] == client):
+                    dst = lineSplite[1]
+                    bandWidth = lineSplite[2]
+                    output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
+                    break
+                else:
+                    continue
 
 
-        file_object = open(fileName, "r+")
         for line in file_object:
             line = line.strip()
             lineSplite = line.split(',')
