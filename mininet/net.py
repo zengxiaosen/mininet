@@ -852,7 +852,7 @@ class Mininet( object ):
     #     self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' >> /home/aonezeng/log/delay.out')
     #     sleep(period)
 
-    def iperfContext(self, fileName):
+    def iperfContext(self, fileName, period=60):
         base_port = 5001
         server_list = []
         host_list = [h for h in self.hosts]
@@ -862,16 +862,18 @@ class Mininet( object ):
         else:
             output("there is not context file\n")
             return
-
+        base_port = 5001
         file_object = open(fileName, "r+")
         for line in file_object:
             line = line.strip()
             lineSplite = line.split(',')
-            output(line + "\n")
             output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
+            self.iperf_single(host_list=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
+            sleep(.05)
+            base_port += 1
 
         file_object.close()
-
+        sleep(period)
 
 
     def getBwRes(self, bw):

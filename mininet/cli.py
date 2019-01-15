@@ -216,6 +216,10 @@ class CLI( Cmd ):
         if len(args) == 1:
             fileName = args[0]
             self.mn.iperfContext(fileName)
+        elif len(args) == 2:
+            fileName = args[0]
+            period = args[1]
+            self.mn.iperfContext(fileName, float(period))
         else:
             error('invalid number of args: iperfcontext contextPath \n' +
                   'contextPath example: /home/kexin/context/trafficCtx_5M.csv')
