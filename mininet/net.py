@@ -870,27 +870,40 @@ class Mininet( object ):
             for line in file_object:
                 line = line.strip()
                 lineSplite = line.split(',')
-                output("lineSplite[0]:" + lineSplite[0] + ", str(client): " + str(client))
+                # search src
                 if (lineSplite[0] == str(client)):
                     dst = lineSplite[1]
                     bandWidth = lineSplite[2]
-                    output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
+                    # output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
+                    # search dst
+                    dst = self.getDst(lineSplite[1], file_object, _len, host_list)
+                    output('src:%s,dst:%s,bw:%s \n' % (str(client), str(dst), lineSplite[2]))
                     break
                 else:
                     continue
 
 
 
-        for line in file_object:
-            line = line.strip()
-            lineSplite = line.split(',')
-            # output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
             # self.iperf_single(hosts=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
-            sleep(.05)
-            base_port += 1
+            # sleep(.05)
+            # base_port += 1
 
         file_object.close()
         sleep(period)
+
+    def getDst(self, dstStr, file_object, _len, host_list):
+        for line in file_object:
+            line = line.strip()
+            lineSplite = line.split(',')
+            if (lineSplite[1] == dstStr):
+                for i in xrange(0, _len):
+                    server = host_list[i]
+                    if (str(server) == dstStr):
+                        return server
+                    else:
+                        continue
+            else:
+                continue
 
 
     def getBwRes(self, bw):
