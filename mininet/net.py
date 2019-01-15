@@ -880,6 +880,7 @@ class Mininet( object ):
                     continue
 
 
+
         for line in file_object:
             line = line.strip()
             lineSplite = line.split(',')
