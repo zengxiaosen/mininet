@@ -854,9 +854,6 @@ class Mininet( object ):
 
     def iperfContext(self, fileName, period=60):
         base_port = 5001
-        server_list = []
-        host_list = [h for h in self.hosts]
-        _len = len(host_list)
         if (os.path.exists(fileName)):
             output("loading context file, " + fileName + "\n")
         else:
