@@ -210,6 +210,16 @@ class CLI( Cmd ):
         "Ping between first two hosts, returns all ping results."
         self.mn.pingPairFull()
 
+    def do_iperfcontext(self, line ):
+        """load context from disk"""
+        args = line.split()
+        if len(args) == 1:
+            fileName = args[0]
+            self.mn.iperfContext(fileName)
+        else:
+            error('invalid number of args: iperfcontext contextPath \n' +
+                  'contextPath example: /home/kexin/context/trafficCtx_5M.csv')
+
 
     def do_iperfmulti( self, line ):
         """Multi iperf UDP test between nodes"""

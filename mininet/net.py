@@ -852,6 +852,19 @@ class Mininet( object ):
     #     self.hosts[0].cmd('ping -c10'+ self.hosts[-1].IP() + ' >> /home/aonezeng/log/delay.out')
     #     sleep(period)
 
+    def iperfContext(self, fileName):
+        base_port = 5001
+        server_list = []
+        host_list = [h for h in self.hosts]
+        _len = len(host_list)
+        if (os.path.exists(fileName)):
+            output("loading context file, " + fileName)
+        else:
+            output("there is not context file")
+            return
+
+
+
 
     def iperfMulti(self, bw, period=60):
 

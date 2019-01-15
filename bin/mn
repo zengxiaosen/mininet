@@ -91,7 +91,7 @@ LINKS = { 'default': Link,  # Note: overridden below
 # XXX: it would be nice if we could specify a default test, but
 # this may be tricky
 TESTS = { name: True
-          for name in ( 'pingall', 'pingpair', 'iperf', 'iperfudp', 'iperfmulti' ) }
+          for name in ( 'pingall', 'pingpair', 'iperf', 'iperfudp', 'iperfmulti', 'iperfcontext' ) }
 
 CLI = None  # Set below if needed
 
@@ -111,7 +111,7 @@ TESTS.update( all=allTest, none=nullTest, build=nullTest )
 
 # Map to alternate spellings of Mininet() methods
 ALTSPELLING = { 'pingall': 'pingAll', 'pingpair': 'pingPair',
-                'iperfudp': 'iperfUdp', 'iperfmulti': 'iperfMulti' }
+                'iperfudp': 'iperfUdp', 'iperfmulti': 'iperfMulti', 'iperfcontext': 'iperfContext' }
 
 def runTests( mn, options ):
     """Run tests
