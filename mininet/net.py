@@ -867,7 +867,6 @@ class Mininet( object ):
         file_object = open(fileName, "r+")
         for i in xrange(0, _len):
             client = host_list[i]
-            output("client: " + str(client) + "\n")
             for line in file_object:
                 line = line.strip()
                 lineSplite = line.split(',')
