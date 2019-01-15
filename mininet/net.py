@@ -872,7 +872,6 @@ class Mininet( object ):
                 lineSplite = line.split(',')
                 # search src
                 if (lineSplite[0] == str(client)):
-                    dst = lineSplite[1]
                     bandWidth = lineSplite[2]
                     # output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
                     # search dst
