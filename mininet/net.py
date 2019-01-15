@@ -878,18 +878,20 @@ class Mininet( object ):
                     dst = self.getDst(lineSplite[1], fileName, _len, host_list)
                     # dst = lineSplite[1]
                     output('src:%s,dst:%s,bw:%s \n' % (str(client), str(dst), lineSplite[2]))
+                    self.iperf_single(hosts=[client, dst], udpBw=lineSplite[2], period=period,
+                                      port=base_port)
+                    sleep(.05)
+                    base_port += 1
                     break
                 else:
                     continue
 
 
 
-            # self.iperf_single(hosts=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
-            # sleep(.05)
-            # base_port += 1
+
 
         file_object.close()
-        # sleep(period)
+        sleep(period)
 
     def getDst(self, dstStr, fileName, _len, host_list):
         file_object = open(fileName, "r+")
