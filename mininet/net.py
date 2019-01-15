@@ -865,7 +865,7 @@ class Mininet( object ):
             line = line.strip()
             lineSplite = line.split(',')
             output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
-            self.iperf_single(host_list=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
+            self.iperf_single(hosts=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
             sleep(.05)
             base_port += 1
 
