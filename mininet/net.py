@@ -858,9 +858,9 @@ class Mininet( object ):
         host_list = [h for h in self.hosts]
         _len = len(host_list)
         if (os.path.exists(fileName)):
-            output("loading context file, " + fileName)
+            output("loading context file, " + fileName + "\n")
         else:
-            output("there is not context file")
+            output("there is not context file\n")
             return
 
 
