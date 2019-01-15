@@ -854,18 +854,27 @@ class Mininet( object ):
 
     def iperfContext(self, fileName, period=60):
         base_port = 5001
+        server_list = []
+        host_list = [h for h in self.hosts]
+        _len = len(host_list)
+
         if (os.path.exists(fileName)):
             output("loading context file, " + fileName + "\n")
         else:
             output("there is not context file\n")
             return
         base_port = 5001
+        for i in xrange(0, _len):
+            client = host_list[i]
+            output(str(client))
+
+
         file_object = open(fileName, "r+")
         for line in file_object:
             line = line.strip()
             lineSplite = line.split(',')
-            output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
-            self.iperf_single(hosts=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
+            # output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
+            # self.iperf_single(hosts=[lineSplite[0], lineSplite[1]], udpBw=lineSplite[2], period=period, port=base_port)
             sleep(.05)
             base_port += 1
 
