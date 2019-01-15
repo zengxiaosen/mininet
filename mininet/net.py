@@ -863,8 +863,23 @@ class Mininet( object ):
             output("there is not context file\n")
             return
 
+        for i in xrange(0, _len):
+            client = host_list[i]
+            server = client
+            while(server == client):
+                server = random.choice(host_list)
+            server_list.append(server)
 
 
+
+    def getBwRes(self, bw):
+        bwStrLen = len(bw)
+        bwStrEnd = bw[bwStrLen - 1]
+        bwStrSize = bw[0:-1]
+        r = random.random()
+        bwRandom = int(bwStrSize) * r
+        bwRes = str(bwRandom) + bwStrEnd
+        return bwRes
 
     def iperfMulti(self, bw, period=60):
 
@@ -879,21 +894,14 @@ class Mininet( object ):
         else:
             output("there is not history context")
 
-
         for i in xrange(0, _len):
             client = host_list[i]
             server = client
             while( server == client ):
                 server = random.choice(host_list)
-
             server_list.append(server)
-            
-            bwStrLen = len(bw)
-            bwStrEnd = bw[bwStrLen-1]
-            bwStrSize = bw[0:-1]
-            r = random.random()
-            bwRandom = int(bwStrSize) * r
-            bwRes = str(bwRandom) + bwStrEnd
+            bwRes = self.getBwRes(bw)
+
             #log and persist
             thread.start_new_thread(self.trafficContextLogAndPersist, (), {"bwRes": bwRes, "client": client, "server": server, "bw": bw})
             self.iperf_single(hosts = [client, server], udpBw=bwRes, period= period, port=base_port)
