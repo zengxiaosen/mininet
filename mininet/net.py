@@ -870,7 +870,8 @@ class Mininet( object ):
             for line in file_object:
                 line = line.strip()
                 lineSplite = line.split(',')
-                if (lineSplite[0] == client):
+                output("lineSplite[0]:" + lineSplite[0] + ", str(client): " + str(client))
+                if (lineSplite[0] == str(client)):
                     dst = lineSplite[1]
                     bandWidth = lineSplite[2]
                     output('src:%s,dst:%s,bw:%s \n' % (lineSplite[0], lineSplite[1], lineSplite[2]))
